@@ -1,0 +1,1 @@
+web: gunicorn safety_monitor.wsgi
