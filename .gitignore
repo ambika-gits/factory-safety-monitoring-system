@@ -1,0 +1,19 @@
+# Virtual Environments
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# Database
+db.sqlite3
+
+# ZIP files
+*.zip
+
+# VS Code
+.vscode/
+
+# YOLO output
+runs/
