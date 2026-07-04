@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard | SafeVision AI</title>
+
+<!-- Bootstrap -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+<!-- Google Fonts -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+rel="stylesheet">
+
+<!-- ChartJS -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- CSS -->
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<!-- ===========================================
+NAVBAR
+=========================================== -->
+
+<nav class="navbar navbar-expand-lg fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand logo"
+href="index.html">
+
+<span class="logo-blue">
+
+Safe
+
+</span>
+
+Vision AI
+
+</a>
+
+<button class="navbar-toggler bg-light"
+
+data-bs-toggle="collapse"
+
+data-bs-target="#navbar">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse justify-content-end"
+
+id="navbar">
+
+<ul class="navbar-nav">
+
+<li class="nav-item">
+
+<a class="nav-link"
+
+href="index.html">
+
+Home
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link"
+
+href="detection.html">
+
+Detection
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link active"
+
+href="dashboard.html">
+
+Dashboard
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link"
+
+href="analytics.html">
+
+Analytics
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link"
+
+href="about.html">
+
+About
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</nav>
+
+<!-- ===========================================
+HEADER
+=========================================== -->
+
+<section class="hero"
+
+style="padding-top:150px;padding-bottom:70px;">
+
+<div class="container">
+
+<div class="text-center">
+
+<p class="hero-tag">
+
+FACTORY ANALYTICS
+
+</p>
+
+<h1>
+
+Safety
+
+<span>
+
+Dashboard
+
+</span>
+
+</h1>
+
+<p class="hero-description">
+
+Real-time visualization of worker safety,
+helmet detection,
+AI monitoring,
+and violation analytics.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================================
+TOP CARDS
+=========================================== -->
+
+<section class="pb-5">
+
+<div class="container">
+
+<div class="row g-4">
+
+<div class="col-lg-3">
+
+<div class="stats-card">
+
+<i class="bi bi-people-fill"></i>
+
+<h2 id="workers">
+
+24
+
+</h2>
+
+<p>
+
+Workers
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-3">
+
+<div class="stats-card">
+
+<i class="bi bi-shield-check"></i>
+
+<h2 id="safe">
+
+21
+
+</h2>
+
+<p>
+
+Safe
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-3">
+
+<div class="stats-card">
+
+<i class="bi bi-exclamation-triangle-fill"></i>
+
+<h2 id="violations">
+
+3
+
+</h2>
+
+<p>
+
+Violations
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-3">
+
+<div class="stats-card">
+
+<i class="bi bi-cpu-fill"></i>
+
+<h2>
+
+99%
+
+</h2>
+
+<p>
+
+Accuracy
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================================
+                LATEST VIOLATION
+========================================================== -->
+
+<div class="container mb-4">
+
+<div class="row g-4">
+
+    <div class="col-lg-6">
+
+        <div class="glass p-4 h-100">
+
+            <h4 class="mb-3">
+                <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+                Latest Violation
+            </h4>
+
+            <img
+                id="latestImage"
+                src="assets/images/camera-placeholder.jpg"
+                class="img-fluid rounded mb-3"
+                alt="Latest Violation">
+
+            <p><strong>Worker:</strong> <span id="latestWorker">Unknown Worker</span></p>
+
+            <p><strong>Camera:</strong> <span id="latestCamera">Camera 1</span></p>
+
+            <p><strong>Location:</strong> <span id="latestLocation">Assembly Line</span></p>
+
+            <p><strong>Confidence:</strong> <span id="latestConfidence">0%</span></p>
+
+            <p><strong>Time:</strong> <span id="latestTime">--</span></p>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-6">
+
+        <div class="glass p-4 h-100">
+
+            <h4 class="mb-3">
+                <i class="bi bi-clock-history text-primary"></i>
+                Recent Violations
+            </h4>
+
+            <div class="table-responsive">
+
+                <table class="table table-dark table-hover">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Worker</th>
+                            <th>Status</th>
+                            <th>Confidence</th>
+                            <th>Time</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="recentTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- ===========================================
+CHARTS
+=========================================== -->
+
+<section class="pb-5">
+
+<div class="container">
+
+<div class="row g-4">
+
+<div class="col-lg-8">
+
+<div class="glass p-4">
+
+<h3>
+
+Daily Safety Monitoring
+
+</h3>
+
+<hr>
+
+<div style="position: relative; height:320px; width: 100%;">
+    <canvas id="lineChart"></canvas>
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="glass p-4">
+
+<h3>
+
+Today's Summary
+
+</h3>
+
+<hr>
+
+<div style="position: relative; height:300px; max-width:350px; margin:auto; width: 100%;">
+    <canvas id="pieChart"></canvas>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================================
+LIVE STATUS
+=========================================== -->
+
+<section class="pb-5">
+
+<div class="container">
+
+<div class="row g-4">
+
+<div class="col-lg-6">
+
+<div class="glass p-4">
+
+<h3>
+
+<i class="bi bi-activity">
+
+</i>
+
+Live System Status
+
+</h3>
+
+<hr>
+
+<div class="d-flex justify-content-between mb-3">
+
+<span>
+
+Backend
+
+</span>
+
+<span class="badge bg-success">
+
+Online
+
+</span>
+
+</div>
+
+<div class="d-flex justify-content-between mb-3">
+
+<span>
+
+YOLOv8
+
+</span>
+
+<span class="badge bg-success">
+
+Running
+
+</span>
+
+</div>
+
+<div class="d-flex justify-content-between mb-3">
+
+<span>
+
+Database
+
+</span>
+
+<span class="badge bg-success">
+
+Connected
+
+</span>
+
+</div>
+
+<div class="d-flex justify-content-between">
+
+<span>
+
+API
+
+</span>
+
+<span class="badge bg-success">
+
+Healthy
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<div class="glass p-4">
+
+<h3>
+
+<i class="bi bi-bar-chart-line-fill">
+
+</i>
+
+Performance
+
+</h3>
+
+<hr>
+
+<div class="progress mb-4">
+
+<div
+
+class="progress-bar bg-success"
+
+style="width:98%;">
+
+98%
+
+</div>
+
+</div>
+
+<div class="progress mb-4">
+
+<div
+
+class="progress-bar bg-info"
+
+style="width:95%;">
+
+95%
+
+</div>
+
+</div>
+
+<div class="progress">
+
+<div
+
+class="progress-bar bg-primary"
+
+style="width:90%;">
+
+90%
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================================
+WORKER SAFETY TABLE
+=========================================== -->
+
+<section class="pb-5">
+
+<div class="container">
+
+<div class="glass p-4">
+
+<h3>
+
+<i class="bi bi-people-fill text-primary"></i>
+
+Worker Safety Overview
+
+</h3>
+
+<hr>
+
+<div class="table-responsive">
+
+<table class="table table-dark table-hover">
+
+<thead>
+
+<tr>
+
+<th>Worker ID</th>
+
+<th>Name</th>
+
+<th>Helmet</th>
+
+<th>Status</th>
+
+<th>Confidence</th>
+
+</tr>
+
+</thead>
+
+<tbody id="workerTable">
+
+<tr>
+
+<td>W001</td>
+
+<td>John Doe</td>
+
+<td>Yes</td>
+
+<td>
+
+<span class="badge bg-success">Safe</span>
+
+</td>
+
+<td>98%</td>
+
+</tr>
+
+<tr>
+
+<td>W002</td>
+
+<td>Mike Ross</td>
+
+<td>No</td>
+
+<td>
+
+<span class="badge bg-danger">Violation</span>
+
+</td>
+
+<td>96%</td>
+
+</tr>
+
+<tr>
+
+<td>W003</td>
+
+<td>Sarah Lee</td>
+
+<td>Yes</td>
+
+<td>
+
+<span class="badge bg-success">Safe</span>
+
+</td>
+
+<td>97%</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================================
+RECENT VIOLATIONS
+=========================================== -->
+
+<section class="pb-5">
+
+<div class="container">
+
+<div class="glass p-4">
+
+<h3>
+
+<i class="bi bi-exclamation-triangle-fill text-danger"></i>
+
+Recent Violations
+
+</h3>
+
+<hr>
+
+<div class="table-responsive">
+
+<table class="table table-dark table-hover">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Worker</th>
+
+<th>Violation</th>
+
+<th>Time</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="violationTable">
+
+<tr>
+
+<td>#101</td>
+
+<td>Mike Ross</td>
+
+<td>No Helmet</td>
+
+<td>10:30 AM</td>
+
+<td>
+
+<span class="badge bg-danger">Critical</span>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>#102</td>
+
+<td>John Doe</td>
+
+<td>Helmet Removed</td>
+
+<td>11:05 AM</td>
+
+<td>
+
+<span class="badge bg-warning text-dark">Warning</span>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>#103</td>
+
+<td>Unknown</td>
+
+<td>No Safety Gear</td>
+
+<td>11:45 AM</td>
+
+<td>
+
+<span class="badge bg-danger">Critical</span>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================================
+ACTIVITY TIMELINE
+=========================================== -->
+
+<section class="pb-5">
+
+<div class="container">
+
+<div class="glass p-4">
+
+<h3>
+
+<i class="bi bi-clock-history text-info"></i>
+
+Activity Timeline
+
+</h3>
+
+<hr>
+
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item bg-transparent text-light">
+
+✔ 10:00 AM — System Started
+
+</li>
+
+<li class="list-group-item bg-transparent text-light">
+
+✔ 10:15 AM — Camera Connected
+
+</li>
+
+<li class="list-group-item bg-transparent text-light">
+
+✔ 10:30 AM — First Detection Recorded
+
+</li>
+
+<li class="list-group-item bg-transparent text-light">
+
+✔ 11:00 AM — Violation Alert Sent
+
+</li>
+
+<li class="list-group-item bg-transparent text-light">
+
+✔ 11:30 AM — Dashboard Updated
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================================
+AI MODEL INFO
+=========================================== -->
+
+<section class="pb-5">
+
+<div class="container">
+
+<div class="row g-4">
+
+<div class="col-lg-6">
+
+<div class="glass p-4">
+
+<h3>
+
+<i class="bi bi-cpu-fill text-primary"></i>
+
+AI Model Details
+
+</h3>
+
+<hr>
+
+<p>
+
+<strong>Model:</strong> YOLOv8
+
+</p>
+
+<p>
+
+<strong>Framework:</strong> PyTorch
+
+</p>
+
+<p>
+
+<strong>Dataset:</strong> Custom Factory Dataset
+
+</p>
+
+<p>
+
+<strong>Accuracy:</strong> 98.7%
+
+</p>
+
+<p>
+
+<strong>Training:</strong> Google Colab + GPU
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<div class="glass p-4">
+
+<h3>
+
+<i class="bi bi-server text-success"></i>
+
+System Info
+
+</h3>
+
+<hr>
+
+<p>
+
+<strong>Backend:</strong> Django REST API
+
+</p>
+
+<p>
+
+<strong>Database:</strong> SQLite / PostgreSQL
+
+</p>
+
+<p>
+
+<strong>Deployment:</strong> Render / AWS
+
+</p>
+
+<p>
+
+<strong>Frontend:</strong> HTML + Bootstrap
+
+</p>
+
+<p>
+
+<strong>Version:</strong> 1.0.0
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================================
+CHART SCRIPT INITIALIZATION
+=========================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* ===============================
+        LINE CHART - SAFETY TREND
+    =============================== */
+
+    const lineCtx = document.getElementById("lineChart");
+
+    if (lineCtx) {
+
+        new Chart(lineCtx, {
+
+            type: "line",
+
+            data: {
+
+                labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+
+                datasets: [
+
+                    {
+
+                        label: "Safe Workers",
+
+                        data: [20, 22, 21, 23, 24, 25, 26],
+
+                        borderColor: "#00d4ff",
+
+                        backgroundColor: "rgba(0,212,255,0.2)",
+
+                        tension: 0.4
+
+                    },
+
+                    {
+
+                        label: "Violations",
+
+                        data: [5, 4, 6, 3, 2, 3, 1],
+
+                        borderColor: "#ff4d4d",
+
+                        backgroundColor: "rgba(255,77,77,0.2)",
+
+                        tension: 0.4
+
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+
+                        labels: {
+
+                            color: "#fff"
+
+                        }
+
+                    }
+
+                },
+
+                scales: {
+
+                    x: {
+
+                        ticks: {
+
+                            color: "#fff"
+
+                        }
+
+                    },
+
+                    y: {
+
+                        ticks: {
+
+                            color: "#fff"
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+    /* ===============================
+        PIE CHART - TODAY SUMMARY
+    =============================== */
+
+    const pieCtx = document.getElementById("pieChart");
+
+    if (pieCtx) {
+
+        new Chart(pieCtx, {
+
+            type: "doughnut",
+
+            data: {
+
+                labels: ["Safe", "Violations"],
+
+                datasets: [{
+
+                    data: [85, 15],
+
+                    backgroundColor: ["#00d4ff", "#ff4d4d"]
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+
+                        labels: {
+
+                            color: "#fff"
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+});
+
+</script>
+
+<!-- ===========================================
+FOOTER
+=========================================== -->
+
+<footer class="text-center py-4">
+
+<div class="container">
+
+<p class="text-secondary">
+
+© 2026 SafeVision AI | Factory Safety Monitoring System
+
+</p>
+
+<p class="text-secondary">
+
+Built with Django • YOLOv8 • Bootstrap • Chart.js
+
+</p>
+
+</div>
+
+</footer>
+
+<!-- ===========================================
+SCRIPTS
+=========================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="js/main.js"></script>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+
+</html>
